@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MaisVacina.Migrations
 {
     [DbContext(typeof(MaisVacinaContext))]
-    [Migration("20210607142642_Initial")]
-    partial class Initial
+    [Migration("20210607172039_Atualização")]
+    partial class Atualização
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace MaisVacina.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Cpf");
+                    b.Property<string>("CPF");
 
                     b.Property<string>("Email");
 

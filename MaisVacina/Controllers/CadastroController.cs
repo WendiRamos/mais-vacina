@@ -54,7 +54,7 @@ namespace MaisVacina.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Create([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
             if (ModelState.IsValid)
             {
@@ -66,14 +66,14 @@ namespace MaisVacina.Controllers
         }
 
         // GET: Cadastro/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? Id)
         {
-            if (id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
-            var cadastro = await _context.Cadastro.FindAsync(id);
+            var cadastro = await _context.Cadastro.FindAsync(Id);
             if (cadastro == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace MaisVacina.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Edit(int? id, [Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
             if (id != cadastro.Id)
             {

@@ -16,7 +16,7 @@ namespace MaisVacina.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     CPF = table.Column<string>(nullable: true),
                     Nome = table.Column<string>(nullable: true),
-                    Nascimento = table.Column<DateTime>(nullable: false),
+                    Nascimento = table.Column<DateTime>(nullable: true),
                     Endereço = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true)
                 },

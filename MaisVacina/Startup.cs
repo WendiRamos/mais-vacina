@@ -35,10 +35,9 @@ namespace MaisVacina
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddDbContext<MaisVacinaContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("MaisVacinaContext"), builder =>
-                builder.MigrationsAssembly("MaisVacina")));
+            builder.MigrationsAssembly("MaisVacina")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,7 +61,7 @@ namespace MaisVacina
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{Id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
