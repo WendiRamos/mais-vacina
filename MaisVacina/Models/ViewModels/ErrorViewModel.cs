@@ -1,6 +1,6 @@
 using System;
 
-namespace MaisVacina.Models
+namespace MaisVacina.Models.ViewModels
 {
     public class ErrorViewModel
     {

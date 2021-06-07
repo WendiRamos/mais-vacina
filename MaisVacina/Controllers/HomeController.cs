@@ -1,5 +1,6 @@
 ﻿using MaisVacina.Models;
 using Microsoft.AspNetCore.Mvc;
+using MaisVacina.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
