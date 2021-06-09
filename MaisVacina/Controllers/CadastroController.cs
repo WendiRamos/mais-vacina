@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MaisVacina.Data;
 using MaisVacina.Models;
+using MaisVacina.Models.ViewModels;
 
 namespace MaisVacina.Controllers
 {
@@ -24,7 +25,7 @@ namespace MaisVacina.Controllers
         {
             return View(await _context.Cadastro.ToListAsync());
         }
-
+       
 
         // GET: Cadastro/Details
         public async Task<IActionResult> Details(int? Id)
@@ -43,13 +44,11 @@ namespace MaisVacina.Controllers
 
             return View(cadastro);
         }
+
+
         // GET: Cadastro/Confirm
-        public async Task<IActionResult> Confirm(int? Id)
+       public async Task<IActionResult> Confirm(int? Id)
         {
-            if (Id == null)
-            {
-                return NotFound();
-            }
 
             var cadastro = await _context.Cadastro
                 .FirstOrDefaultAsync(m => m.Id == Id);
@@ -59,6 +58,11 @@ namespace MaisVacina.Controllers
             }
 
             return View(cadastro);
+        }
+
+        private IActionResult View(Func<int?, Task<IActionResult>> confirm)
+        {
+            throw new NotImplementedException();
         }
 
 
