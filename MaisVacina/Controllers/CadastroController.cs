@@ -25,7 +25,8 @@ namespace MaisVacina.Controllers
             return View(await _context.Cadastro.ToListAsync());
         }
 
-        // GET: Cadastro/Details/5
+
+        // GET: Cadastro/Details
         public async Task<IActionResult> Details(int? Id)
         {
             if (Id == null)
@@ -42,16 +43,38 @@ namespace MaisVacina.Controllers
 
             return View(cadastro);
         }
+        // GET: Cadastro/Confirm
+        public async Task<IActionResult> Confirm(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var cadastro = await _context.Cadastro
+                .FirstOrDefaultAsync(m => m.Id == Id);
+            if (cadastro == null)
+            {
+                return NotFound();
+            }
+
+            return View(cadastro);
+        }
+
 
         // GET: Cadastro/Create
         public IActionResult Create()
         {
             return View();
         }
+        // GET: Cadastro/Create2
+        public IActionResult Create2()
+        {
+            return View();
+        }
+
 
         // POST: Cadastro/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
@@ -65,7 +88,22 @@ namespace MaisVacina.Controllers
             return View(cadastro);
         }
 
-        // GET: Cadastro/Edit/5
+        // POST: Cadastro/Create2
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create2([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cadastro);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Confirm));
+            }
+            return View(cadastro);
+        }
+
+
+        // GET: Cadastro/Edit
         public async Task<IActionResult> Edit(int? Id)
         {
             if (Id == null)
@@ -81,9 +119,7 @@ namespace MaisVacina.Controllers
             return View(cadastro);
         }
 
-        // POST: Cadastro/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Cadastro/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, [Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
@@ -116,7 +152,7 @@ namespace MaisVacina.Controllers
             return View(cadastro);
         }
 
-        // GET: Cadastro/Delete/5
+        // GET: Cadastro/Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,7 +170,7 @@ namespace MaisVacina.Controllers
             return View(cadastro);
         }
 
-        // POST: Cadastro/Delete/5
+        // POST: Cadastro/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)

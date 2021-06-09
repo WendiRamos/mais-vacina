@@ -1,7 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "MaisVacina";
+    ViewData["Message"] = "MaisVacina é um site para pré-cadastro de vacinação.";
+    ViewData["Message 2"] = "Para se cadastrar cliquei abaixo em 'Fazer Cadastro'";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
+<h3>@ViewData["Message 2"]</h3>
 
-<p>Use this area to provide additional information.</p>
+<p></p>
+    <a asp-area="" asp-controller="Cadastro" asp-action="Create2" class=" btn btn-success ">Fazer Cadastro </a>
+

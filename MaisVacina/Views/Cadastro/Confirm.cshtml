@@ -1,10 +1,11 @@
 ﻿@model MaisVacina.Models.Cadastro
 
 @{
-    ViewData["Title"] = "Detalhes";
+    ViewData["Title"] = "Confirmação";
 }
 
-<h2>Detalhes do Cadastro</h2>
+<h2>Confirmação dos dados.</h2>
+<h3>Obrigado por se cadastrar, a unidade de saúde mais próxima entrará em contato!</h3>
 
 <div>
     <h4></h4>
@@ -44,5 +45,5 @@
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
-    <a asp-action="Index">Casdastros</a>
+    <a asp-action="About">Inicio</a>
 </div>
