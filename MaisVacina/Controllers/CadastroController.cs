@@ -25,7 +25,7 @@ namespace MaisVacina.Controllers
         {
             return View(await _context.Cadastro.ToListAsync());
         }
-       
+
 
         // GET: Cadastro/Details
         public async Task<IActionResult> Details(int? Id)
@@ -47,22 +47,22 @@ namespace MaisVacina.Controllers
 
 
         // GET: Cadastro/Confirm
-       public async Task<IActionResult> Confirm(int? Id)
+        public async Task<IActionResult> Confirm(int? Id)
         {
 
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
             var cadastro = await _context.Cadastro
-                .FirstOrDefaultAsync(m => m.Id == Id);
+                 .FirstOrDefaultAsync(m => m.Id == Id);
             if (cadastro == null)
             {
                 return NotFound();
             }
 
             return View(cadastro);
-        }
-
-        private IActionResult View(Func<int?, Task<IActionResult>> confirm)
-        {
-            throw new NotImplementedException();
         }
 
 
@@ -121,6 +121,7 @@ namespace MaisVacina.Controllers
                 return NotFound();
             }
             return View(cadastro);
+           
         }
 
         // POST: Cadastro/Edit
@@ -152,8 +153,11 @@ namespace MaisVacina.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
+         
             }
+            await _context.SaveChangesAsync();
             return View(cadastro);
+
         }
 
         // GET: Cadastro/Delete
@@ -189,5 +193,7 @@ namespace MaisVacina.Controllers
         {
             return _context.Cadastro.Any(e => e.Id == id);
         }
+
+
     }
 }

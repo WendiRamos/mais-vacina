@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MaisVacina.Models
 {
@@ -7,6 +8,8 @@ namespace MaisVacina.Models
         public int Id { get; set; }
         public string CPF { get; set; }
         public String Nome { get; set; }
+
+        [DataType(DataType.Date)]
         public DateTime Nascimento { get; set; }
         public string Endereço { get; set; }
         public string Email { get; set; }
