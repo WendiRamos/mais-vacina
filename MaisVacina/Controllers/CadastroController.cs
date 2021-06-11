@@ -50,7 +50,7 @@ namespace MaisVacina.Controllers
         public async Task<IActionResult> Confirm(int? Id)
         {
 
-            if (Id == null)
+            /*if (Id == null)
             {
                 return NotFound();
             }
@@ -60,9 +60,9 @@ namespace MaisVacina.Controllers
             if (cadastro == null)
             {
                 return NotFound();
-            }
+            }*/
 
-            return View(cadastro);
+            return View();
         }
 
 
@@ -155,7 +155,6 @@ namespace MaisVacina.Controllers
                 return RedirectToAction(nameof(Index));
          
             }
-            await _context.SaveChangesAsync();
             return View(cadastro);
 
         }
