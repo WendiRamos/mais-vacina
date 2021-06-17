@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using MaisVacina.Data;
 using MaisVacina.Models;
 using MaisVacina.Models.ViewModels;
+using MaisVacina.Serviços;
+
 
 namespace MaisVacina.Controllers
 {
@@ -50,7 +52,7 @@ namespace MaisVacina.Controllers
         public async Task<IActionResult> Confirm(int? Id)
         {
 
-            /*if (Id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
@@ -60,9 +62,9 @@ namespace MaisVacina.Controllers
             if (cadastro == null)
             {
                 return NotFound();
-            }*/
+            }
 
-            return View();
+            return View(cadastro);
         }
 
 
@@ -101,7 +103,7 @@ namespace MaisVacina.Controllers
             {
                 _context.Add(cadastro);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Confirm));
+                return RedirectToAction(nameof(Confirm), new { Id = cadastro.Id});
             }
             return View(cadastro);
         }
@@ -115,20 +117,26 @@ namespace MaisVacina.Controllers
                 return NotFound();
             }
 
-            var cadastro = await _context.Cadastro.FindAsync(Id);
+            var cadastro = await _context.Cadastro
+                .FirstOrDefaultAsync(m => m.Id == Id);
             if (cadastro == null)
             {
                 return NotFound();
             }
+
             return View(cadastro);
-           
         }
 
         // POST: Cadastro/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CadastroFormViewModel { Cadastro = cadastro };
+                return View(viewModel);
+            }
             if (id != cadastro.Id)
             {
                 return NotFound();
@@ -153,10 +161,9 @@ namespace MaisVacina.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-         
+
             }
             return View(cadastro);
-
         }
 
         // GET: Cadastro/Delete

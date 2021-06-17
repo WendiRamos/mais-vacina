@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace MaisVacina.Serviços.Exceptions
 {
-    public class NotFoundException
+    public class NotFoundException : ApplicationException
     {
+        public NotFoundException(string message) : base(message)
+        {
+
+        }
     }
 }

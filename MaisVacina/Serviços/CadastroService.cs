@@ -1,11 +1,10 @@
 ﻿
 using MaisVacina.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MaisVacina.Serviços.Exceptions;
+using MaisVacina.Data;
 
 namespace MaisVacina.Serviços
 {
@@ -21,7 +20,7 @@ namespace MaisVacina.Serviços
         public async Task<List<Cadastro>> FindAllAsync()
         {//Taks é um obj que encapsula o processamento assincrono
          // await avisa que a chamada vai ser assincrona
-            return await _context.Seller.ToListAsync();
+            return await _context.Cadastro.ToListAsync();
 
         }
         public async Task InsertAsync(Cadastro obj)
@@ -31,28 +30,28 @@ namespace MaisVacina.Serviços
         }
         public async Task<Cadastro> FindByIdAsync(int id)
         {
-            return await _context.Cadastro.Include(obj => obj.Cadastro).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Cadastro.Include(obj => obj.Id).FirstOrDefaultAsync(obj => obj.Id == id);
         }
         public async Task RemoveAsync(int id)
         {
             try
             {
                 var obj = await _context.Cadastro.FindAsync(id);
-                _context.Seller.Remove(obj);
+                _context.Cadastro.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException )
             {
-                throw new IntegrityException("Can't delete seller because he/she has sales!");
+                throw new IntegrityException("Não é possível excluir o cadastro, cadastro sem informações!");
             }
         }
 
         public async Task UpdateAsync(Cadastro obj)
         {
-            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == obj.Id);
+            bool hasAny = await _context.Cadastro.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
             {
-                throw new NotFoundException("Id not found");
+                throw new NotFoundException("Id não existe!");
             }
             try
             {
