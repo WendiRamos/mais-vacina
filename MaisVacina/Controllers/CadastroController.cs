@@ -132,11 +132,7 @@ namespace MaisVacina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new CadastroFormViewModel { Cadastro = cadastro };
-                return View(viewModel);
-            }
+           
             if (id != cadastro.Id)
             {
                 return NotFound();

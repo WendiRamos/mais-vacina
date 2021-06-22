@@ -13,7 +13,9 @@ namespace MaisVacina.Models
         public DateTime Nascimento { get; set; }
         public string Endereço { get; set; }
         public string Email { get; set; }
-        public Cadastro() { }
+        public Cadastro()
+        {
+        }
         public Cadastro(int id, string Cpf, string nome, DateTime nascimento, string endereço, string email)
         {
             Id = id;
