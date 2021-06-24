@@ -3,14 +3,16 @@ using System;
 using MaisVacina.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaisVacina.Migrations
 {
     [DbContext(typeof(MaisVacinaContext))]
-    partial class MaisVacinaContextModelSnapshot : ModelSnapshot
+    [Migration("20210623153215_Login")]
+    partial class Login
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,6 +49,8 @@ namespace MaisVacina.Migrations
                     b.Property<string>("Nomelogin");
 
                     b.Property<string>("Senhalogin");
+
+                    b.Property<string>("Senhalogin2");
 
                     b.HasKey("Idlogin");
 
