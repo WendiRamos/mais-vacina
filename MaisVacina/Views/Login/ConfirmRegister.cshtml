@@ -1,30 +1,48 @@
 ﻿@model MaisVacina.Models.Login
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url(/Images/vacina.jpg);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center, center;
+        }
+    </style>
 
-@{
-    ViewData["Title"] = "Confirmação";
-}
+</head>
+<body>
 
-<h2>Confirmação de Registro.</h2>
+    @{
+        ViewData["Title"] = "Confirmação";
+    }
 
-<div>
-    <h4></h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nomelogin)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nomelogin)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Emaillogin)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Emaillogin)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
-    <a asp-controller="Cadastro" asp-action="Index" class="btn btn-success">Entrar</a>
-</div>
+    <h2>Confirmação de Registro.</h2>
+
+    <div>
+        <h4></h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nomelogin)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nomelogin)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Emaillogin)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Emaillogin)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
+        <a asp-controller="Cadastro" asp-action="Index" class="btn btn-success">Entrar</a>
+    </div>
+
+</body>
+</html>

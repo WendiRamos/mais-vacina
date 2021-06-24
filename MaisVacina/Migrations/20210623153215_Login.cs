@@ -13,9 +13,9 @@ namespace MaisVacina.Migrations
                 {
                     Idlogin = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Nomelogin = table.Column<string>(nullable: true),
-                    Emaillogin = table.Column<string>(nullable: true),
-                    Senhalogin = table.Column<string>(nullable: true)
+                    Nomelogin = table.Column<string>(nullable: false),
+                    Emaillogin = table.Column<string>(nullable: false),
+                    Senhalogin = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

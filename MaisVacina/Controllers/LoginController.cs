@@ -1,9 +1,13 @@
 ﻿using MaisVacina.Data;
 using MaisVacina.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MaisVacina.Controllers
@@ -19,10 +23,14 @@ namespace MaisVacina.Controllers
 
         public IActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index));
+            }
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Logar(string Emaillogin, string Senhalogin)
+        public async Task<IActionResult> Login(string Emaillogin, string Senhalogin)
         {
             MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=maisvacinadb;uid=root;password=luizcarlos");
             await mySqlConnection.OpenAsync();
@@ -33,11 +41,39 @@ namespace MaisVacina.Controllers
 
             if (await reader.ReadAsync())
             {
-            
-                return RedirectToAction(nameof(Index));
+                int Idlogin = reader.GetInt32(0);
+                string nome = reader.GetString(1);
+
+                List<Claim> direitosdeAcesso = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier,Idlogin.ToString()),
+                    new Claim(ClaimTypes.Name,nome)
+                    
+                };
+
+                var identity = new ClaimsIdentity(direitosdeAcesso, "Identity.Login");
+                var userPrincipal = new ClaimsPrincipal(new[] { identity });
+
+                await HttpContext.SignInAsync(userPrincipal,
+                    new AuthenticationProperties
+                    {
+                        IsPersistent=false,
+                        ExpiresUtc = DateTime.Now.AddHours(10)
+                    });
+
+                //return RedirectToAction(nameof(Index));
+                return Json(new { Msg = "Usuário logado!" });
 
             }
             return Json(new { Msg = "Usuário não encontrado! Verifique suas credenciais!" });
+        }
+        public async Task<IActionResult> Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await HttpContext.SignOutAsync();
+            }
+            return RedirectToAction("About", "Home");
         }
 
         public async Task<IActionResult> ConfirmRegister(int? Id)

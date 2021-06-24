@@ -11,11 +11,14 @@ namespace MaisVacina.Models
         [Key]
         public int Idlogin { get; set; }
         [Display(Name ="Nome:")]
+        [Required]
         public String Nomelogin { get; set; }
         [Display(Name = "Email:")]
+        [Required]
         public string Emaillogin { get; set; }
 
         [Display(Name = "Senha:")]
+        [Required]
         public string Senhalogin { get; set; }
 
         public Login()

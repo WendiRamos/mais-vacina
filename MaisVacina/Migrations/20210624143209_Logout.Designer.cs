@@ -3,14 +3,16 @@ using System;
 using MaisVacina.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MaisVacina.Migrations
 {
     [DbContext(typeof(MaisVacinaContext))]
-    partial class MaisVacinaContextModelSnapshot : ModelSnapshot
+    [Migration("20210624143209_Logout")]
+    partial class Logout
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,14 +44,11 @@ namespace MaisVacina.Migrations
                     b.Property<int>("Idlogin")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Emaillogin")
-                        .IsRequired();
+                    b.Property<string>("Emaillogin");
 
-                    b.Property<string>("Nomelogin")
-                        .IsRequired();
+                    b.Property<string>("Nomelogin");
 
-                    b.Property<string>("Senhalogin")
-                        .IsRequired();
+                    b.Property<string>("Senhalogin");
 
                     b.HasKey("Idlogin");
 

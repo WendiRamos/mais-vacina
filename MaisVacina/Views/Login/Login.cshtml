@@ -1,39 +1,54 @@
 ﻿@model MaisVacina.Models.Login
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url(/Images/vacina.jpg);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center, center;
+        }
+    </style>
 
-@{
-    ViewData["Title"] = "Conecte-se";
-}
+</head>
+<body>
+    @{
+        ViewData["Title"] = "Conecte-se";
+    }
 
-<h2>Conectar</h2>
+    <h2>Conectar</h2>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-controller="Login" asp-action="Logar" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Emaillogin" class="control-label">Email:</label>
-                <input asp-for="Emaillogin" class="form-control" />
-                <span asp-validation-for="Emaillogin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                <input asp-for="Senhalogin" class="form-control" />
-                <span asp-validation-for="Senhalogin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Entrar" class="btn btn-success" />
-            </div>
-        </form>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Login" asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Emaillogin" class="control-label">Email:</label>
+                    <input asp-for="Emaillogin" class="form-control" />
+                    <span asp-validation-for="Emaillogin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Senhalogin" class="control-label">Senha:</label>
+                    <input asp-for="Senhalogin" class="form-control" />
+                    <span asp-validation-for="Senhalogin" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Entrar" class="btn btn-success" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<div>
-    <a asp-controller="Login" asp-action="Register" class="btn btn-default">Criar Registro</a>
-    <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
-</div>
+    <div>
+        <a asp-controller="Login" asp-action="Register" class="btn btn-default">Criar Registro</a>
+        <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
+    </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 
-
+</body>
+</html>

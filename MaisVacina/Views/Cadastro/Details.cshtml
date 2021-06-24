@@ -1,48 +1,67 @@
 ﻿@model MaisVacina.Models.Cadastro
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url(/Images/vacina.jpg);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center, center;
+        }
+    </style>
 
-@{
-    ViewData["Title"] = "Detalhes";
-}
+</head>
+<body>
 
-<h2>Detalhes do Cadastro</h2>
+    @{
+        ViewData["Title"] = "Detalhes";
+    }
 
-<div>
-    <h4></h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Nascimento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nascimento)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Endereço)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Endereço)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.CPF)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.CPF)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit"class="btn btn-default" asp-route-id="@Model.Id">Editar</a>
-    <a asp-action="Index">Cadastros</a>
-</div>
+    <h2>Detalhes do Cadastro</h2>
+
+    <div>
+        <h4></h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nascimento)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nascimento)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Endereço)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereço)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CPF)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CPF)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.Id">Editar</a>
+        <a asp-action="Index">Cadastros</a>
+    </div>
+
+</body>
+</html>
+
