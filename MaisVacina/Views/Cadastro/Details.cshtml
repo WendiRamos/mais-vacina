@@ -1,5 +1,5 @@
 ﻿@model MaisVacina.Models.Cadastro
-<!DOCTYPE html>
+
 <html>
 <head>
     <style>
@@ -22,8 +22,7 @@
     <h2>Detalhes do Cadastro</h2>
 
     <div>
-        <h4></h4>
-        <hr />
+
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Nome)
@@ -60,6 +59,10 @@
     <div>
         <a asp-action="Edit" class="btn btn-default" asp-route-id="@Model.Id">Editar</a>
         <a asp-action="Index">Cadastros</a>
+    </div>
+    <div>
+        <img src="~/images/img-cl-21.png"
+             width="300px" height="300px" />
     </div>
 
 </body>

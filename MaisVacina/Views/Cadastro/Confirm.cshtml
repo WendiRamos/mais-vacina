@@ -1,6 +1,6 @@
 ﻿@model MaisVacina.Models.Cadastro
 
-<!DOCTYPE html>
+
 <html>
 <head>
     @{
@@ -23,49 +23,54 @@
     @{
         ViewData["Title"] = "Confirmação";
     }
+   
+        <h2>Confirmação dos dados.</h2>
+        <h4><font color="black">Obrigado por se cadastrar, a unidade de saúde mais próxima</font></h4>
+        <h4><font color="black">entrará em contato! Use máscaras. Salve Vidas.</font></h4>
 
-    <h2>Confirmação dos dados.</h2>
-    <h3>Obrigado por se cadastrar, a unidade de saúde mais próxima entrará em contato!</h3>
+        <div>
+            <h4></h4>
 
-    <div>
-        <h4></h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Nascimento)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Nascimento)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereço)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereço)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.CPF)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.CPF)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
-    </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Nome)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Nascimento)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Nascimento)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Endereço)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Endereço)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CPF)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CPF)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
+        </div>
+        <h1>  </h1>
+
+        <img src="/images/bt-pre-cadastro.png"
+             width="350px" height="150px">
 
 
 </body>

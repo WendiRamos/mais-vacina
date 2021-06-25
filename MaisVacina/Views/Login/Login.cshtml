@@ -20,7 +20,6 @@
 
     <h2>Conectar</h2>
 
-    <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-controller="Login" asp-action="Login" method="post">
@@ -45,10 +44,10 @@
         <a asp-controller="Login" asp-action="Register" class="btn btn-default">Criar Registro</a>
         <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
     </div>
-
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+    <div>
+        <img src="~/images/02-saude.png"
+             wwidth="450px" height="250px"/>
+    </div>
 
 </body>
 </html>
