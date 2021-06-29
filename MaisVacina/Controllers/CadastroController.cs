@@ -9,7 +9,7 @@ using MaisVacina.Data;
 using MaisVacina.Models;
 using MaisVacina.Models.ViewModels;
 using MaisVacina.Serviços;
-
+using System.Diagnostics;
 
 namespace MaisVacina.Controllers
 {
@@ -34,14 +34,14 @@ namespace MaisVacina.Controllers
         {
             if (Id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var cadastro = await _context.Cadastro
                 .FirstOrDefaultAsync(m => m.Id == Id);
             if (cadastro == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
             }
 
             return View(cadastro);
@@ -54,14 +54,14 @@ namespace MaisVacina.Controllers
 
             if (Id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var cadastro = await _context.Cadastro
                  .FirstOrDefaultAsync(m => m.Id == Id);
             if (cadastro == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
             }
 
             return View(cadastro);
@@ -103,7 +103,7 @@ namespace MaisVacina.Controllers
             {
                 _context.Add(cadastro);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Confirm), new { Id = cadastro.Id});
+                return RedirectToAction(nameof(Confirm), new { Id = cadastro.Id });
             }
             return View(cadastro);
         }
@@ -114,14 +114,14 @@ namespace MaisVacina.Controllers
         {
             if (Id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var cadastro = await _context.Cadastro
                 .FirstOrDefaultAsync(m => m.Id == Id);
             if (cadastro == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
             }
 
             return View(cadastro);
@@ -132,10 +132,10 @@ namespace MaisVacina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
-           
+
             if (id != cadastro.Id)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não correspondes!" });
             }
 
             if (ModelState.IsValid)
@@ -145,11 +145,11 @@ namespace MaisVacina.Controllers
                     _context.Update(cadastro);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateConcurrencyException e)
                 {
                     if (!CadastroExists(cadastro.Id))
                     {
-                        return NotFound();
+                        return RedirectToAction(nameof(Error), new { message = e.Message });
                     }
                     else
                     {
@@ -167,14 +167,14 @@ namespace MaisVacina.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var cadastro = await _context.Cadastro
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (cadastro == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
             }
 
             return View(cadastro);
@@ -195,7 +195,19 @@ namespace MaisVacina.Controllers
         {
             return _context.Cadastro.Any(e => e.Id == id);
         }
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
 
+      
+        }
 
     }
+
+
 }
