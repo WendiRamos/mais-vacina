@@ -32,6 +32,7 @@ namespace MaisVacina
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
 
             services.AddAuthentication("Identity.Login")
                 .AddCookie("Identity.Login",config => {
@@ -44,6 +45,7 @@ namespace MaisVacina
             services.AddDbContext<MaisVacinaContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("MaisVacinaContext"), builder =>
             builder.MigrationsAssembly("MaisVacina")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
