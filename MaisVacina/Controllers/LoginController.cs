@@ -1,5 +1,6 @@
 ﻿using MaisVacina.Data;
 using MaisVacina.Models;
+using MaisVacina.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -25,10 +27,13 @@ namespace MaisVacina.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Index));
+              
             }
             return View();
         }
+
+       
+
         [HttpPost]
         public async Task<IActionResult> Login(string Emaillogin, string Senhalogin)
         {
@@ -61,11 +66,12 @@ namespace MaisVacina.Controllers
                         ExpiresUtc = DateTime.Now.AddHours(10)
                     });
 
-                //return RedirectToAction(nameof(Index));
-                return Json(new { Msg = "Usuário logado!" });
-
+                return RedirectToAction("Index", "Cadastro");
+              
             }
-            return Json(new { Msg = "Usuário não encontrado! Verifique suas credenciais!" });
+            return RedirectToAction(nameof(Error), new { message = "Usuário não encontrado! Verifique suas credenciais!" });
+           
+
         }
         public async Task<IActionResult> Logout()
         {
@@ -76,19 +82,19 @@ namespace MaisVacina.Controllers
             return RedirectToAction("About", "Home");
         }
 
-        public async Task<IActionResult> ConfirmRegister(int? Id)
+        public async Task<IActionResult> ConfirmRegister(int? Idlogin)
         {
 
-            if (Id == null)
+            if (Idlogin == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var login = await _context.Login
-                 .FirstOrDefaultAsync(m => m.Idlogin == Id);
+                 .FirstOrDefaultAsync(m => m.Idlogin == Idlogin);
             if (login == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Verifique suas credenciais!, e tente novamente" });
             }
 
             return View(login);
@@ -100,15 +106,27 @@ namespace MaisVacina.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Email,Senha")] Login login)
+        public async Task<IActionResult> Register([Bind("Nomelogin,Emaillogin,Senhalogin")] Login login)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(login);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ConfirmRegister), new { Id = login.Idlogin });
+                return RedirectToAction(nameof(ConfirmRegister), new { Idlogin = login.Idlogin });
             }
             return View(login);
+        }
+       
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+            return View(viewModel);
+
+
         }
     }
 }

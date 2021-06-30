@@ -1,5 +1,4 @@
-﻿@model MaisVacina.Models.Login
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -14,12 +13,13 @@
 
 </head>
 <body>
+    @model MaisVacina.Models.Login
 
     @{
         ViewData["Title"] = "Confirmação";
     }
 
-    <h2>Confirmação de Registro.</h2>
+    <h2>Confirmação de Registro</h2>
 
     <div>
         <dl class="dl-horizontal">
@@ -38,8 +38,8 @@
         </dl>
     </div>
     <div>
-        <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
-        <a asp-controller="Cadastro" asp-action="Index" class="btn btn-success">Entrar</a>
+     
+        <a asp-controller="Cadastro" asp-action="Login" class="btn btn-success">Entrar</a>
     </div>
 
 </body>

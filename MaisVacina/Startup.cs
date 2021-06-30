@@ -46,6 +46,7 @@ namespace MaisVacina
             options.UseMySql(Configuration.GetConnectionString("MaisVacinaContext"), builder =>
             builder.MigrationsAssembly("MaisVacina")));
 
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
