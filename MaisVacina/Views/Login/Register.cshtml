@@ -12,6 +12,7 @@
         }
     </style>
 
+
 </head>
 <body>
     @{
@@ -19,6 +20,7 @@
     }
 
     <h2>Criar Registro</h2>
+    <h4><font color="black">Registro apenas para usuários interno da rede!</font></h4>
 
     <div class="row">
         <div class="col-md-4">
@@ -30,25 +32,30 @@
                     <span asp-validation-for="Nomelogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Emaillogin" class="control-label">Email:</label>
+                    <label asp-for="Usuario" class="control-label">Usuário de rede:</label>
+                    <input asp-for="Usuario" class="form-control" />
+                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Emaillogin" class="control-label">Email Corporativo:</label>
                     <input asp-for="Emaillogin" class="form-control" />
                     <span asp-validation-for="Emaillogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                    <input asp-for="Senhalogin" class="form-control" />
+                    <input type="password" asp-for="Senhalogin" class="form-control" />
                     <span asp-validation-for="Senhalogin" class="text-danger"></span>
                 </div>
-
+                <div class="form-group">
+                    <label class="control-label">Confirmar Senha:</label>
+                    <input type="password" name="Confirmar" class="form-control" />
+                </div>
                 <div class="form-group">
                     <input type="submit" value="Criar" class="btn btn-success" />
+                    <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
                 </div>
             </form>
         </div>
-    </div>
-
-    <div>
-        <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
     </div>
     <div>
         <img src="~/images/passo-01.png"

@@ -25,13 +25,18 @@
             <form asp-controller="Login" asp-action="Login" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
+                    <label asp-for="Usuario" class="control-label">Usuário de rede:</label>
+                    <input type="text" asp-for="Usuario" class="form-control" />
+                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Emaillogin" class="control-label">Email:</label>
-                    <input asp-for="Emaillogin" class="form-control" />
-                    <span asp-validation-for="Emaillogin" class="text-danger"></span>
+                    <input type="text" asp-for="Emaillogin" class="form-control" />
+                    <span asp-validation-for="Emaillogin" ></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                    <input asp-for="Senhalogin" class="form-control" />
+                    <input  type="password" asp-for="Senhalogin" class="form-control" />
                     <span asp-validation-for="Senhalogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">

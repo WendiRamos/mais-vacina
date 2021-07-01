@@ -1,4 +1,5 @@
 ﻿using MaisVacina.Data;
+
 using MaisVacina.Models;
 using MaisVacina.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
@@ -35,12 +36,12 @@ namespace MaisVacina.Controllers
        
 
         [HttpPost]
-        public async Task<IActionResult> Login(string Emaillogin, string Senhalogin)
+        public async Task<IActionResult> Login(string Usuario, string Emaillogin, string Senhalogin)
         {
             MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=maisvacinadb;uid=root;password=luizcarlos");
             await mySqlConnection.OpenAsync();
             MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
-            mySqlCommand.CommandText = $"SELECT * FROM login WHERE Emaillogin = '{Emaillogin}' AND Senhalogin='{Senhalogin}'";
+            mySqlCommand.CommandText = $"SELECT * FROM login WHERE Usuario = '{Usuario}' AND Emaillogin = '{Emaillogin}' AND Senhalogin='{Senhalogin}'";
 
             MySqlDataReader reader = mySqlCommand.ExecuteReader();
 
@@ -48,7 +49,7 @@ namespace MaisVacina.Controllers
             {
                 int Idlogin = reader.GetInt32(0);
                 string nome = reader.GetString(1);
-
+               
                 List<Claim> direitosdeAcesso = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier,Idlogin.ToString()),
@@ -106,7 +107,7 @@ namespace MaisVacina.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nomelogin,Emaillogin,Senhalogin")] Login login)
+        public async Task<IActionResult> Register([Bind("Nomelogin,Usuario,Emaillogin,Senhalogin")] Login login)
         {
             if (ModelState.IsValid)
             {

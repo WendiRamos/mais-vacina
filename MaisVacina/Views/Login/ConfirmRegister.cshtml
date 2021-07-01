@@ -20,6 +20,7 @@
     }
 
     <h2>Confirmação de Registro</h2>
+    <h4><font color="black">Acesso autorizado!</font></h4>
 
     <div>
         <dl class="dl-horizontal">
@@ -30,6 +31,12 @@
                 @Html.DisplayFor(model => model.Nomelogin)
             </dd>
             <dt>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Usuario)
+            </dd>
+            <dt>
                 @Html.DisplayNameFor(model => model.Emaillogin)
             </dt>
             <dd>
@@ -38,8 +45,11 @@
         </dl>
     </div>
     <div>
-     
-        <a asp-controller="Cadastro" asp-action="Login" class="btn btn-success">Entrar</a>
+        <a asp-controller="Login" asp-action="Login" class="btn btn-success">Entrar</a>
+    </div>
+    <div>
+        <img src="~/images/img-cl-21.png"
+             width="300px" height="300px" />
     </div>
 
 </body>

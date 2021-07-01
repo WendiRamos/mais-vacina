@@ -41,6 +41,7 @@ namespace MaisVacina
                     config.AccessDeniedPath = "/About";
                     config.ExpireTimeSpan = TimeSpan.FromHours(1);
                     });
+            services.AddAuthorization();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<MaisVacinaContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("MaisVacinaContext"), builder =>
@@ -64,10 +65,9 @@ namespace MaisVacina
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
-
+            
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
