@@ -27,8 +27,13 @@ namespace MaisVacina.Models
 
 
         [Display(Name = "Senha:")]
-        [Required]
+        [Required(ErrorMessage ="Insira uma senha válida")]
         public string Senhalogin { get; set; }
+
+        [Display(Name = "Confirmar senha:")]
+        [Required(ErrorMessage = "Insira uma confirmação de senha")]
+        [Compare("Senhalogin", ErrorMessage ="As senhas não correspondem")]
+        public string SenhaConfirma { get; set; }
 
         public Login()
         {

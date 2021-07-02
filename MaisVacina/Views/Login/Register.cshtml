@@ -4,15 +4,13 @@
 <head>
     <style>
         body {
-            background-image: url(/Images/vacina.jpg);
+            background-image: url(/Images/vacina-fundo.jpeg);
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center, center;
         }
     </style>
-
-
 </head>
 <body>
     @{
@@ -20,35 +18,36 @@
     }
 
     <h2>Criar Registro</h2>
-    <h4><font color="black">Registro apenas para usuários interno da rede!</font></h4>
+    <h4><font color="black">Registro apenas para usuário interno da rede!</font></h4>
 
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="Register">
+            <form asp-action="Register" autocomplete="off" >
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Nomelogin" class="control-label">Nome:</label>
-                    <input asp-for="Nomelogin" class="form-control" />
+                    <input autocomplete="off" asp-for="Nomelogin" class="form-control" />
                     <span asp-validation-for="Nomelogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Usuario" class="control-label">Usuário de rede:</label>
-                    <input asp-for="Usuario" class="form-control" />
+                    <input autocomplete="off" asp-for="Usuario" class="form-control" />
                     <span asp-validation-for="Usuario" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Emaillogin" class="control-label">Email Corporativo:</label>
-                    <input asp-for="Emaillogin" class="form-control" />
+                    <input autocomplete="off" asp-for="Emaillogin" class="form-control" />
                     <span asp-validation-for="Emaillogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                    <input type="password" asp-for="Senhalogin" class="form-control" />
+                    <input autocomplete="off" type="password" asp-for="Senhalogin" class="form-control" />
                     <span asp-validation-for="Senhalogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label">Confirmar Senha:</label>
-                    <input type="password" name="Confirmar" class="form-control" />
+                    <label asp-for="SenhaConfirma" class="control-label">Confirma senha:</label>
+                    <input autocomplete="off" type="password" asp-for="SenhaConfirma" class="form-control" />
+                    <span asp-validation-for="SenhaConfirma" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Criar" class="btn btn-success" />

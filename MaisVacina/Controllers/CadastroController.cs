@@ -25,7 +25,11 @@ namespace MaisVacina.Controllers
         // GET: Cadastro
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cadastro.ToListAsync());
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(await _context.Cadastro.ToListAsync());
+            }
+            return RedirectToAction("About", "Home");
         }
 
 

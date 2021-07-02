@@ -4,7 +4,7 @@
 <head>
     <style>
         body {
-            background-image: url(/Images/vacina.jpg);
+            background-image: url(/Images/vacina-fundo.jpeg);
             background-attachment: fixed;
             background-repeat: no-repeat;
             background-size: cover;
@@ -22,6 +22,7 @@
 
     <p>
         <a asp-action="Create" class="btn btn-success">Criar Novo</a>
+        <a asp-controller="Busca" asp-action="Search" class="btn btn-default">Pesquisar</a>
     </p>
 
     <table class="table">
@@ -37,9 +38,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Endereço)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CPF)
-                </th>
+               
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
@@ -58,9 +57,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Endereço)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CPF)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)

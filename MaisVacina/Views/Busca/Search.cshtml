@@ -1,0 +1,38 @@
+﻿@model MaisVacina.Models.Cadastro
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url(/Images/vacina-fundo.jpeg);
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center, center;
+        }
+    </style>
+
+</head>
+<body>
+    <h2>Pesquisar Cadastro</h2>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <form class="navbar-form navbar-left" role="search" autocomplete="off">
+                <div class="form-group">
+                    <label for="Nome" class="col-lg-2 control-label">Nome</label>
+                    <input name="Nome" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Procurar</button>
+            </form>
+            <form class="navbar-form navbar-left" role="search" autocomplete="off">
+                <div class="form-group">
+                    <label for="Id" class="col-lg-2 control-label">Id</label>
+                    <input name="Id" class="form-control" />
+                </div>
+                <button type="submit" class="btn btn-primary">Procurar</button>
+            </form>
+        </div>
+    </nav>
+
+</body>
+</html>

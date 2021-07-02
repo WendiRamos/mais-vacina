@@ -28,12 +28,12 @@ namespace MaisVacina.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-              
+                return null;
             }
             return View();
         }
 
-       
+
 
         [HttpPost]
         public async Task<IActionResult> Login(string Usuario, string Emaillogin, string Senhalogin)
@@ -49,12 +49,12 @@ namespace MaisVacina.Controllers
             {
                 int Idlogin = reader.GetInt32(0);
                 string nome = reader.GetString(1);
-               
+
                 List<Claim> direitosdeAcesso = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier,Idlogin.ToString()),
                     new Claim(ClaimTypes.Name,nome)
-                    
+
                 };
 
                 var identity = new ClaimsIdentity(direitosdeAcesso, "Identity.Login");
@@ -63,15 +63,15 @@ namespace MaisVacina.Controllers
                 await HttpContext.SignInAsync(userPrincipal,
                     new AuthenticationProperties
                     {
-                        IsPersistent=false,
+                        IsPersistent = false,
                         ExpiresUtc = DateTime.Now.AddHours(10)
                     });
 
                 return RedirectToAction("Index", "Cadastro");
-              
+
             }
             return RedirectToAction(nameof(Error), new { message = "Usuário não encontrado! Verifique suas credenciais!" });
-           
+
 
         }
         public async Task<IActionResult> Logout()
@@ -107,9 +107,9 @@ namespace MaisVacina.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nomelogin,Usuario,Emaillogin,Senhalogin")] Login login)
+        public async Task<IActionResult> Register([Bind("Nomelogin,Usuario,Emaillogin,Senhalogin,SenhaConfirma")] Login login)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && login.Senhalogin.Equals(login.SenhaConfirma))
             {
                 _context.Add(login);
                 await _context.SaveChangesAsync();
@@ -117,7 +117,7 @@ namespace MaisVacina.Controllers
             }
             return View(login);
         }
-       
+
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

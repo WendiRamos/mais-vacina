@@ -65,8 +65,10 @@ namespace MaisVacina
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
+            //app.UseAuthorization();
             app.UseAuthentication();
+           
             
             app.UseMvc(routes =>
             {
