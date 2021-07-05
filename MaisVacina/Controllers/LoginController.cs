@@ -113,7 +113,7 @@ namespace MaisVacina.Controllers
             {
                 _context.Add(login);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(ConfirmRegister), new { Idlogin = login.Idlogin });
+                return RedirectToAction(nameof(ConfirmRegister), new { login.Idlogin });
             }
             return View(login);
         }

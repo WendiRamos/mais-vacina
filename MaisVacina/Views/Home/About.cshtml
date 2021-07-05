@@ -19,18 +19,14 @@
 <body>
     @{
         ViewData["Title"] = "MaisVacina";
-        ViewData["Message"] = "MaisVacina é um site para pré-cadastro de vacinação.";
-        ViewData["Message4"] = "MaisVacina é um site para pré-cadastro de vacinação contra o";
-        ViewData["Message1"] = " Covid-19, enquanto sua vez não chega";
-        ViewData["Message3"] = "que tal já deixar seu pré-cadastro salvo?";
         ViewData["Message 2"] = "Para se cadastrar clique em ";
     }
     <h1><strong>@ViewData["Title"]</strong></h1>
-    <h3>@ViewData["Message"]</h3>
+   
 
     <h4>
         <font color="black">
-            MaisVacina é um site para pré-cadastro de vacinação contra o Covid-19,
+            MaisVacina é um site para pré-cadastro da campanha de vacinação contra o Covid-19,
         </font>
     </h4>
     <h4>
@@ -42,7 +38,7 @@
     <h4><font color="black">Para saber mais sobre a importância da vacinação, assista o video abaixo!</font></h4>
     <p></p>
     <iframe width="400" height="250" src="https://www.youtube.com/embed/zTiGIPjiSNY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <h4><font color="black">Para mais informações sobre a vacinação</font><a href="https://www.google.com/search?q=vacina%C3%A7%C3%A3o+covid-19&rlz=1C1FCXM_pt-PTBR954BR954&oq=vacina%C3%A7%C3%A3o+&aqs=chrome.2.69i57j69i59j35i39j0i402l2j69i61j69i60j69i61.4770j0j4&sourceid=chrome&ie=UTF-8"> "Clique aqui!"</a></h4>
+    <h4><font color="black">Para mais informações sobre a vacinação</font><a href="https://www.google.com/search?q=vacina%C3%A7%C3%A3o+covid-19&rlz=1C1FCXM_pt-PTBR954BR954&oq=vacina%C3%A7%C3%A3o+&aqs=chrome.2.69i57j69i59j35i39j0i402l2j69i61j69i60j69i61.4770j0j4&sourceid=chrome&ie=UTF-8"><font color="#00008B">"Clique aqui!"</font></a></h4>
 
 
     <h4><font color="black">@ViewData["Message 2"]</font><a asp-area="" asp-controller="Cadastro" asp-action="Create2" class=" btn btn-success ">Fazer Cadastro </a></h4>

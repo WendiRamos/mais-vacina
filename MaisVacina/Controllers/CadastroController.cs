@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MaisVacina.Data;
 using MaisVacina.Models;
 using MaisVacina.Models.ViewModels;
-using MaisVacina.Serviços;
+using MaisVacina.Services;
 using System.Diagnostics;
 
 namespace MaisVacina.Controllers
@@ -16,6 +16,7 @@ namespace MaisVacina.Controllers
     public class CadastroController : Controller
     {
         private readonly MaisVacinaContext _context;
+
 
         public CadastroController(MaisVacinaContext context)
         {
@@ -36,46 +37,60 @@ namespace MaisVacina.Controllers
         // GET: Cadastro/Details
         public async Task<IActionResult> Details(int? Id)
         {
-            if (Id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
-            }
+                if (Id == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
+                }
 
-            var cadastro = await _context.Cadastro
-                .FirstOrDefaultAsync(m => m.Id == Id);
-            if (cadastro == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
-            }
+                var cadastro = await _context.Cadastro
+                    .FirstOrDefaultAsync(m => m.Id == Id);
+                if (cadastro == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
+                }
 
-            return View(cadastro);
+                return View(cadastro);
+            }
+            return RedirectToAction("About", "Home");
         }
 
 
         // GET: Cadastro/Confirm
         public async Task<IActionResult> Confirm(int? Id)
         {
-
-            if (Id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
-            }
 
-            var cadastro = await _context.Cadastro
-                 .FirstOrDefaultAsync(m => m.Id == Id);
-            if (cadastro == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
-            }
+                if (Id == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
+                }
 
-            return View(cadastro);
+                var cadastro = await _context.Cadastro
+                     .FirstOrDefaultAsync(m => m.Id == Id);
+                if (cadastro == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
+                }
+
+                return View(cadastro);
+
+            }
+            return RedirectToAction("About", "Home");
         }
+
 
 
         // GET: Cadastro/Create
         public IActionResult Create()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return View();
+            }
+            return RedirectToAction("About", "Home");
         }
         // GET: Cadastro/Create2
         public IActionResult Create2()
@@ -89,13 +104,18 @@ namespace MaisVacina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                _context.Add(cadastro);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                if (ModelState.IsValid)
+                {
+                    _context.Add(cadastro);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                return View(cadastro);
             }
-            return View(cadastro);
+            return RedirectToAction("About", "Home");
         }
 
         // POST: Cadastro/Create2
@@ -107,7 +127,7 @@ namespace MaisVacina.Controllers
             {
                 _context.Add(cadastro);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Confirm), new { Id = cadastro.Id });
+                return RedirectToAction(nameof(Confirm), new { cadastro.Id });
             }
             return View(cadastro);
         }
@@ -116,19 +136,23 @@ namespace MaisVacina.Controllers
         // GET: Cadastro/Edit
         public async Task<IActionResult> Edit(int? Id)
         {
-            if (Id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
-            }
+                if (Id == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
+                }
 
-            var cadastro = await _context.Cadastro
-                .FirstOrDefaultAsync(m => m.Id == Id);
-            if (cadastro == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
-            }
+                var cadastro = await _context.Cadastro
+                    .FirstOrDefaultAsync(m => m.Id == Id);
+                if (cadastro == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
+                }
 
-            return View(cadastro);
+                return View(cadastro);
+            }
+            return RedirectToAction("About", "Home");
         }
 
         // POST: Cadastro/Edit
@@ -136,64 +160,63 @@ namespace MaisVacina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
-
-            if (id != cadastro.Id)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não correspondes!" });
-            }
 
-            if (ModelState.IsValid)
-            {
-                try
+                if (id != cadastro.Id)
                 {
-                    _context.Update(cadastro);
-                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Error), new { message = "Id não correspondes!" });
                 }
-                catch (DbUpdateConcurrencyException e)
-                {
-                    if (!CadastroExists(cadastro.Id))
-                    {
-                        return RedirectToAction(nameof(Error), new { message = e.Message });
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
 
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(cadastro);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException e)
+                    {
+                        if (!CadastroExists(cadastro.Id))
+                        {
+                            return RedirectToAction(nameof(Error), new { message = e.Message });
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+
+                }
+                return View(cadastro);
             }
-            return View(cadastro);
+            return RedirectToAction("About", "Home");
         }
 
         // GET: Cadastro/Delete
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
-            }
+                if (id == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
+                }
 
-            var cadastro = await _context.Cadastro
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (cadastro == null)
-            {
-                return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
-            }
+                var cadastro = await _context.Cadastro
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (cadastro == null)
+                {
+                    return RedirectToAction(nameof(Error), new { message = "Id não existe!" });
+                }
 
-            return View(cadastro);
+                return View(cadastro);
+            }
+            return RedirectToAction("About", "Home");
         }
 
-        // POST: Cadastro/Delete
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int? id)
-        {
-            var cadastro = await _context.Cadastro.FindAsync(id);
-            _context.Cadastro.Remove(cadastro);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+
 
         private bool CadastroExists(int? id)
         {
@@ -208,8 +231,18 @@ namespace MaisVacina.Controllers
             };
             return View(viewModel);
 
-      
+
         }
+
+
+       // public async Task<IActionResult> Search(string Nome)
+       // {
+       //
+       //     ViewData["Nome"] = Nome;
+       //     List<Cadastro> result = await _context.Cadastro(Nome);
+       //     return View(result);
+       // }
+
 
     }
 
