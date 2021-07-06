@@ -11,19 +11,25 @@ namespace MaisVacina.Services
     public class CadastroService
     {
         private readonly MaisVacinaContext _context;
+        
 
         public CadastroService(MaisVacinaContext context)
         {
             _context = context;
+       
         }
-        public async Task<List<Cadastro>> Search(String Nome)
+        public async Task<List<Cadastro>> FindByCadastro(String Nome)
         {
             var result = from obj in _context.Cadastro select obj;
-
+            if (!string.IsNullOrEmpty(Nome))
+            
+                result = result.Where(x => x.Nome == Nome);
+            
             return await result
-                .Include(x => x.Nome)
-                .ToListAsync();
+                  .ToListAsync();
+                
         }
+
 
     }
 }

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MaisVacina.Data;
+using MaisVacina.Services;
 
 namespace MaisVacina
 {
@@ -32,8 +33,8 @@ namespace MaisVacina
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-            
 
+            services.AddScoped<CadastroService>();
             services.AddAuthentication("Identity.Login")
                 .AddCookie("Identity.Login",config => {
                     config.Cookie.Name = "Identity.Login";
@@ -46,6 +47,7 @@ namespace MaisVacina
             services.AddDbContext<MaisVacinaContext>(options =>
             options.UseMySql(Configuration.GetConnectionString("MaisVacinaContext"), builder =>
             builder.MigrationsAssembly("MaisVacina")));
+           
 
             
         }

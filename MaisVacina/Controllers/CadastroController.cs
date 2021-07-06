@@ -16,12 +16,11 @@ namespace MaisVacina.Controllers
     public class CadastroController : Controller
     {
         private readonly MaisVacinaContext _context;
-
-
-        public CadastroController(MaisVacinaContext context)
-        {
+        public CadastroController( MaisVacinaContext context )
+        { 
             _context = context;
         }
+
 
         // GET: Cadastro
         public async Task<IActionResult> Index()
@@ -233,16 +232,6 @@ namespace MaisVacina.Controllers
 
 
         }
-
-
-       // public async Task<IActionResult> Search(string Nome)
-       // {
-       //
-       //     ViewData["Nome"] = Nome;
-       //     List<Cadastro> result = await _context.Cadastro(Nome);
-       //     return View(result);
-       // }
-
 
     }
 

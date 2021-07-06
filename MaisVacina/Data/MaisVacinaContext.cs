@@ -17,7 +17,6 @@ namespace MaisVacina.Data
 
         public DbSet<MaisVacina.Models.Cadastro> Cadastro { get; set; }
         public DbSet<MaisVacina.Models.Login> Login { get; set; }
-      
-    
+        
     }
 }
