@@ -12,17 +12,14 @@ namespace MaisVacina.Models
         public int Idlogin { get; set; }
 
         [Display(Name ="Nome:")]
-        [Required]
         public String Nomelogin { get; set; }
 
 
         [Display(Name = "Usuário:")]
-        [Required]
         public String Usuario { get; set; }
 
 
         [Display(Name = "Email:")]
-        [Required]
         public string Emaillogin { get; set; }
 
 

@@ -59,9 +59,7 @@ namespace MaisVacina.Controllers
         // GET: Cadastro/Confirm
         public async Task<IActionResult> Confirm(int? Id)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-
+            
                 if (Id == null)
                 {
                     return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
@@ -76,8 +74,6 @@ namespace MaisVacina.Controllers
 
                 return View(cadastro);
 
-            }
-            return RedirectToAction("About", "Home");
         }
 
 
@@ -122,12 +118,16 @@ namespace MaisVacina.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create2([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
         {
+            
             if (ModelState.IsValid)
             {
+                
                 _context.Add(cadastro);
                 await _context.SaveChangesAsync();
+        
                 return RedirectToAction(nameof(Confirm), new { cadastro.Id });
             }
+            
             return View(cadastro);
         }
 

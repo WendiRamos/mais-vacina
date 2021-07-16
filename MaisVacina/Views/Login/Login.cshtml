@@ -17,9 +17,9 @@
 <body>
     @{
         ViewData["Title"] = "Conecte-se";
-        
+
     }
-    
+
     <h2>Conectar</h2>
 
     <div class="row">
@@ -28,21 +28,21 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Usuario" class="control-label">Usuário de rede:</label>
-                    <input type="text" asp-for="Usuario" class="form-control" />
+                    <input type="text" asp-for="Usuario" class="form-control" name="usuario" />
                     <span asp-validation-for="Usuario" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Emaillogin" class="control-label">Email:</label>
-                    <input type="text" asp-for="Emaillogin" class="form-control" />
-                    <span asp-validation-for="Emaillogin" ></span>
+                    <input type="text" asp-for="Emaillogin" class="form-control" name="email" />
+                    <span asp-validation-for="Emaillogin"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                    <input  type="password" asp-for="Senhalogin" class="form-control" />
+                    <input type="password" asp-for="Senhalogin" class="form-control" name="senha" />
                     <span asp-validation-for="Senhalogin" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Entrar" class="btn btn-success" />
+                    <input type="submit" onclick="return validar()" value="Entrar" class="btn btn-success" />
                 </div>
             </form>
         </div>
@@ -53,8 +53,34 @@
     </div>
     <div>
         <img src="~/images/02-saude.png"
-             wwidth="450px" height="250px"/>
+             wwidth="450px" height="250px" />
     </div>
+    <script type="text/javascript">
+        function validar() {
+            
+            var usuario = document.getElementById("usuario").value;
+            usuario = usuario.trim();
+            if (usuario === "" || usuario.length < 7 || usuario.length > 15) {
+                alert("Insira um usuario válido!");
+                return false;
+            }
 
+            var email = document.getElementById("email").value;
+            email = email.trim();
+            if (email === "" || email.length < 12 || email.length > 50) {
+                alert("Insira um e-mail válido!")
+                return false;
+            }
+
+            var senha = document.getElementById("senha").value;
+            senha = senha.trim();
+            if (senha === "" || senha.length < 7 || senha.length > 20) {
+                alert("Insira uma senha válida!")
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>
