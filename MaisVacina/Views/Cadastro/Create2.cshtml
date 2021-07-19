@@ -30,69 +30,35 @@
                 <div class="form-group">
                     <label asp-for="Nome" class="control-label"></label>
                     <input asp-for="Nome" class="form-control" id="nome" />
-                    <span asp-validation-for="Nome" class="text-danger"></span>
+                    <span class="invisivel" id="erroNome">Insira um nome válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Nascimento" class="control-label"></label>
                     <input asp-for="Nascimento" class="form-control" id="nasc" />
-                    <span asp-validation-for="Nascimento" class="text-danger"></span>
+                    <span class="invisivel" id="">Insira uma data válida!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Endereço" class="control-label"></label>
-                    <input asp-for="Endereço" class="form-control" id="endereço" />
-                    <span asp-validation-for="Endereço" class="text-danger"></span>
+                    <input asp-for="Endereço" class="form-control" id="endereco" />
+                    <span class="invisivel">Insira um endereço válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="CPF" class="control-label"></label>
                     <input asp-for="CPF" class="form-control" id="cpf" />
-                    <span asp-validation-for="CPF" class="text-danger"></span>
+                    <span class="invisivel">Insira um cpf válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Email" class="control-label"></label>
                     <input asp-for="Email" class="form-control" id="email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <span class="invisivel">Insira um e-mail válido!</span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" onclick="return validar()"  value="Criar" class="btn btn-success" />
+                    <input type="submit" onclick="return validarCadastro()" value="Criar" class="btn btn-success" />
                     <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
                 </div>
             </form>
         </div>
     </div>
-    <script type="text/javascript">
-        function validar() {
-            var nome = document.getElementById("nome").value;
-            nome = nome.trim();
-            if (nome === "" || nome.length < 9 || nome.length > 50) {
-                alert("Insira um nome válido!");
-                return false;
-            }
-            var nasc = document.getElementById("nasc").value;
-            nasc = nasc.trim();
-            if (nasc === "") {
-                alert("Insira uma data válida!");
-                return false;
-            }
-
-            var endereço = document.getElementById("endereço").value;
-            endereço = endereço.trim();
-            if (endereço === "" || endereço.length < 30 || endereço.length > 200) {
-                alert("Insira um endereço válido!")
-                return false;
-            }
-
-
-
-            var email = document.getElementById("email").value;
-            email = email.trim();
-            if (email === "" || email.length < 12 || email.length > 50) {
-                alert("Insira um e-mail válido!")
-                return false;
-            }
-            return true;
-        }
-    </script>
-
 
 </body>
 </html>
