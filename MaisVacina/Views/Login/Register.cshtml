@@ -26,31 +26,31 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Nomelogin" class="control-label">Nome:</label>
-                    <input autocomplete="off" asp-for="Nomelogin" name="login" class="form-control" />
-                    <span asp-validation-for="Nomelogin" class="text-danger"></span>
+                    <input autocomplete="off" asp-for="Nomelogin" id="nome" class="form-control" />
+                    <span class="invisivel" id="erroNome">Insira um nome válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Usuario" class="control-label">Usuário de rede:</label>
-                    <input autocomplete="off" asp-for="Usuario" name="usuario" class="form-control" />
-                    <span asp-validation-for="Usuario" class="text-danger"></span>
+                    <input autocomplete="off" asp-for="Usuario" id="usuario" class="form-control" />
+                    <span class="invisivel" id="erroUsuario">Insira um usuário válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Emaillogin" class="control-label">Email Corporativo:</label>
-                    <input autocomplete="off" asp-for="Emaillogin" name="email" class="form-control" />
-                    <span asp-validation-for="Emaillogin" class="text-danger"></span>
+                    <input autocomplete="off" asp-for="Emaillogin" id="email" class="form-control" />
+                    <span class="invisivel" id="erroEmail">Insira um e-mail válido!</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Senhalogin" class="control-label">Senha:</label>
-                    <input autocomplete="off" type="password" asp-for="Senhalogin" name="senha" class="form-control" />
-                    <span asp-validation-for="Senhalogin" class="text-danger"></span>
+                    <input autocomplete="off" type="password" asp-for="Senhalogin" id="senha" class="form-control" />
+                    <span class="invisivel" id="erroSenha">Insira uma senha válida!</span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="SenhaConfirma" class="control-label">Confirma senha:</label>
-                    <input autocomplete="off" type="password" asp-for="SenhaConfirma" class="form-control" />
-                    <span asp-validation-for="SenhaConfirma" class="text-danger"></span>
+                    <label class="control-label">Confirma senha:</label>
+                    <input autocomplete="off" type="password" class="form-control" id="senhaConfirma" />
+                    <span class="invisivel" id="erroSenhaConfirma"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" onclick="return validar()" value="Criar" class="btn btn-success" />
+                    <input type="submit" onclick="return validarRegister()" value="Criar" class="btn btn-success" />
                     <a asp-controller="Home" asp-action="About" class="btn btn-default">Inicio</a>
                 </div>
             </form>
@@ -60,38 +60,5 @@
         <img src="~/images/passo-01.png"
              width="350px" height="200px" />
     </div>
-    <script type="text/javascript">
-        function validar() {
-            var nome = document.getElementById("nome").value;
-            nome = nome.trim();
-            if (nome === "" || nome.length < 9 || nome.length > 50) {
-                alert("Insira um nome válido!");
-                return false;
-            }
-
-            var usuario = document.getElementById("usuario").value;
-            usuario = usuario.trim();
-            if (usuario === "" || usuario.length < 7 || usuario.length >15) {
-                alert("Insira um usuario válido!");
-                return false;
-            }
-
-            var email = document.getElementById("email").value;
-            email = email.trim();
-            if (email === "" || email.length < 12 || email.length > 50) {
-                alert("Insira um e-mail válido!")
-                return false;
-            }
-
-            var senha = document.getElementById("senha").value;
-            senha = senha.trim();
-            if (senha === "" || senha.length < 7 || senha.length > 20) {
-                alert("Insira uma senha válida!")
-                return false;
-            }
-            
-            return true;
-        }
-    </script>
 </body>
 </html>

@@ -97,7 +97,7 @@ namespace MaisVacina.Controllers
         // POST: Cadastro/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Create([Bind("Nome,Nascimento,Endereco,CPF,Email")] Cadastro cadastro)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -116,7 +116,7 @@ namespace MaisVacina.Controllers
         // POST: Cadastro/Create2
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create2([Bind("Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Create2([Bind("Nome,Nascimento,Endereco,CPF,Email")] Cadastro cadastro)
         {
             
             if (ModelState.IsValid)
@@ -157,7 +157,7 @@ namespace MaisVacina.Controllers
         // POST: Cadastro/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereço,CPF,Email")] Cadastro cadastro)
+        public async Task<IActionResult> Edit(int? id, [Bind("Id,Nome,Nascimento,Endereco,CPF,Email")] Cadastro cadastro)
         {
             if (User.Identity.IsAuthenticated)
             {

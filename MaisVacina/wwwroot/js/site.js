@@ -3,7 +3,7 @@
     nome = nome.trim();
     if (nome === "" || nome.length < 9 || nome.length > 50) {
         document.getElementById("erroNome").className = "visivel";
-        
+
         return false;
     }
     document.getElementById("erroNome").className = "invisivel";
@@ -14,17 +14,21 @@ function validarNasc() {
     var nasc = document.getElementById("nasc").value;
     nasc = nasc.trim();
     if (nasc === "") {
+        document.getElementById("erroNasc").className = "visivel";
         return false;
     }
+    document.getElementById("erroNasc").className = "invisivel";
     return true;
 }
 
-function validarEndereço() {
-    var endereço = document.getElementById("endereco").value;
-    endereço = endereço.trim();
-    if (endereço === "" || endereço.length < 20 || endereço.length > 200) {
+function validarEndereco() {
+    var endereco = document.getElementById("endereco").value;
+    endereco = endereco.trim();
+    if (endereco === "" || endereco.length < 20 || endereco.length > 200) {
+        document.getElementById("erroEndereco").className = "visivel";
         return false;
     }
+    document.getElementById("erroEndereco").className = "invisivel";
     return true;
 }
 
@@ -51,6 +55,7 @@ function validarCpf() {
             cpf == "88888888888" ||
             cpf == "99999999999"
         ) {
+            document.getElementById("erroCpf").className = "visivel";
             return false
         }
 
@@ -64,9 +69,11 @@ function validarCpf() {
 
         var digitoGerado = (soma1 * 10) + soma2;
         if (digitoGerado != digitoDigitado) {
+            document.getElementById("erroCpf").className = "visivel";
             return false
         }
     }
+    document.getElementById("erroCpf").className = "invisivel";
     return true;
 }
 
@@ -74,17 +81,81 @@ function validarEmail() {
     var email = document.getElementById("email").value;
     email = email.trim();
     if (email === "" || email.length < 12 || email.length > 50) {
+        document.getElementById("erroEmail").className = "visivel";
         return false;
     }
+    document.getElementById("erroEmail").className = "invisivel";
     return true;
 }
+
+function validarUsuario() {
+    var usuario = document.getElementById("usuario").value;
+    usuario = usuario.trim();
+    if (usuario === "" || usuario.length < 5 || usuario.length > 10) {
+        document.getElementById("erroUsuario").className = "visivel";
+        return false;
+    }
+    document.getElementById("erroUsuario").className = "invisivel";
+    return true;
+}
+
+function validarSenha() {
+    var senha = document.getElementById("senha").value;
+    senha = senha.trim();
+    if (senha === "" || senha.length < 8 || senha.length > 25) {
+        document.getElementById("erroSenha").className = "visivel";
+        return false;
+    }
+    document.getElementById("erroSenha").className = "invisivel";
+    return true;
+}
+
+function confirmarSenha() {
+    var senhaConfirma = document.getElementById("senhaConfirma").value;
+    senhaConfirma = senhaConfirma.trim();
+    if (senhaConfirma === "" || senhaConfirma.length < 8 || senhaConfirma.length > 25) {
+        document.getElementById("erroSenhaConfirma").textContent = "Insira uma confirmação de senha válida!";
+        document.getElementById("erroSenhaConfirma").className = "visivel";
+        return false;
+    }
+    var senha = document.getElementById("senha").value;
+    if (senha !== senhaConfirma) {
+        document.getElementById("erroSenhaConfirma").textContent = "As senhas não coincidem!";
+        document.getElementById("erroSenhaConfirma").className = "visivel";
+        return false;
+    }
+    document.getElementById("erroSenhaConfirma").className = "invisivel";
+    return true;
+}
+
 
 /*****************************************************************************/
 
 function validarCadastro() {
-    return validarNome() && validarNasc() && validarEndereco() && validarCpf() && validarEmail();
+    var nomeValido = validarNome();
+    var nascValido = validarNasc();
+    var enderecoValido = validarEndereco();
+    var cpfValido = validarCpf();
+    var emailValido = validarEmail();
+
+    return nomeValido && nascValido && enderecoValido && cpfValido && emailValido;
+
+}
+
+function validarRegister() {
+    var nomeValido = validarNome();
+    var usuarioValido = validarUsuario();
+    var emailValido = validarEmail();
+    var senhaValida = validarSenha();
+    var confirmaValido = confirmarSenha();
+
+    return nomeValido && usuarioValido && emailValido && senhaValida && confirmarSenha;
+
 }
 
 function validarLogin() {
-
+    var usuarioValido = validarUsuario();
+    var emailValido = validarEmail();
+    var senhaValida = validarSenha();
+    return usuarioValido && emailValido && senhaValida;
 }

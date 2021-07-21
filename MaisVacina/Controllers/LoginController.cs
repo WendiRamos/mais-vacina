@@ -107,9 +107,9 @@ namespace MaisVacina.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("Nomelogin,Usuario,Emaillogin,Senhalogin,SenhaConfirma")] Login login)
+        public async Task<IActionResult> Register([Bind("Nomelogin,Usuario,Emaillogin,Senhalogin")] Login login)
         {
-            if (ModelState.IsValid && login.Senhalogin.Equals(login.SenhaConfirma))
+            if (ModelState.IsValid )
             {
                 _context.Add(login);
                 await _context.SaveChangesAsync();
