@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<MaisVacina.Models.Cadastro>
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <style>
@@ -20,14 +20,20 @@
 
     <h2>Lista de Cadastros</h2>
 
-    <p>
-        <a asp-action="Create" class="btn btn-success">Criar Novo</a>
-        <a asp-area="" asp-controller="Busca" asp-action="Search">Buscar</a>
-    </p>
-
+    <form class="form-inline" asp-controller="Busca" asp-action="Search">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="Nome">Pesquisar:</label>
+                <input type="text" class="form-control" name="Nome" placeholder="Insira um nome" value=@ViewData["Nome"] />
+            </div>
+        </div>
+        <button type="submit" class=" btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+        <a asp-action="Create" class="btn btn-success">Criar Cadastro</a>
+        <p></p>
+    </form>
+    
     <table class="table">
         <thead>
-
             <tr BGCOLOR="#00BFFF">
                 <th>
                     @Html.DisplayNameFor(model => model.Nome)
@@ -38,13 +44,14 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Endereco)
                 </th>
-               
+
                 <th>
                     @Html.DisplayNameFor(model => model.Email)
                 </th>
                 <th></th>
             </tr>
         </thead>
+
         <tbody>
             @foreach (var item in Model)
             {

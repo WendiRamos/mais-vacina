@@ -17,69 +17,65 @@
     </style>
 </head>
 <h2>Pesquisar Cadastro</h2>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <div class="form-group">
-                    <label for="Nome">Nome</label>
-                    <input type="text" class="form-control" name="Nome" value=@ViewData["Nome"] />
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Pesquisar</button>
-        </form>
+
+<form class="form-inline" asp-controller="Busca" asp-action="Search">
+    <div class="form-group">
+        <div class="form-group">
+            <label for="Nome">Pesquisar:</label>
+            <input type="text" class="form-control" name="Nome" placeholder="Insira um nome" value=@ViewData["Nome"] />
+        </div>
     </div>
-</nav>
-<div class="panel panel-primary">
-    <div class="panel-body">
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr class="success">
-                    <th>
-                        @Html.DisplayNameFor(model => model.Id)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CPF)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nascimento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Endereco)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Id)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CPF)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nascimento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Endereco)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+    <button type="submit" class=" btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    <p></p>
+</form>
+<table class="table ">
+    <thead>
+        <tr BGCOLOR="#00BFFF">
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CPF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr BGCOLOR="#F5F5F5">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CPF)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

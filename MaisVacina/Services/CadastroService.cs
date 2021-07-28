@@ -22,8 +22,7 @@ namespace MaisVacina.Services
         {
             var result = from obj in _context.Cadastro select obj;
             if (!string.IsNullOrEmpty(Nome))
-            
-                result = result.Where(x => x.Nome == Nome);
+            result = result.Where(x => x.Nome.Contains(Nome));
             
             return await result
                   .ToListAsync();

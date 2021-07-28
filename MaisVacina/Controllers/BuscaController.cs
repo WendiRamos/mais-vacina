@@ -21,7 +21,6 @@ namespace MaisVacina.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                ViewData["Nome"] = Nome;
                 var result = await _cadastroService.FindByCadastro(Nome);
                 return View(result);
             }
