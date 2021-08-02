@@ -5,23 +5,30 @@ using MaisVacina.Models.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration.Json;
+using Microsoft.Extensions.Configuration;
+//using Microsoft.Extensions.Configuration;
 
 namespace MaisVacina.Controllers
 {
     public class LoginController : Controller
     {
+        
         private readonly MaisVacinaContext _context;
+        private readonly IConfiguration Configuration;
 
-        public LoginController(MaisVacinaContext context)
+       
+
+        public LoginController(MaisVacinaContext context, IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
 
         public IActionResult Login()
@@ -38,9 +45,10 @@ namespace MaisVacina.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string Usuario, string Emaillogin, string Senhalogin)
         {
-            MySqlConnection mySqlConnection = new MySqlConnection("server=localhost;database=maisvacinadb;uid=root;password=luizcarlos");
-            await mySqlConnection.OpenAsync();
-            MySqlCommand mySqlCommand = mySqlConnection.CreateCommand();
+            string strConexao = Configuration.GetConnectionString("MaisVacinaContext");
+            MySqlConnection MaisVacinaContext = new MySqlConnection(strConexao);
+            await MaisVacinaContext.OpenAsync();
+            MySqlCommand mySqlCommand = MaisVacinaContext.CreateCommand();
             mySqlCommand.CommandText = $"SELECT * FROM login WHERE Usuario = '{Usuario}' AND Emaillogin = '{Emaillogin}' AND Senhalogin='{Senhalogin}'";
 
             MySqlDataReader reader = mySqlCommand.ExecuteReader();

@@ -17,36 +17,68 @@
     </environment>
 </head>
 <body>
-    
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="About" class="navbar-brand">MaisVacina</a>
-            </div>
-            <div class="navbar-collapse collapse d-sm-inline-flex">
-                <ul class="nav navbar-nav mr-auto">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="About" class="navbar-brand">MaisVacina</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
 
-                    <li><a asp-area="" asp-controller="Cadastro" asp-action="Create2">Cadastro</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Serviços</a></li>
-                    <li><a asp-area="" asp-controller="Login" asp-action="Register">Registre-se</a></li>
-                    <li><a asp-area="" asp-controller="Login" asp-action="Login">Entrar</a></li>
-                </ul>
-                
+                        <li><a asp-area="" asp-controller="Cadastro" asp-action="Index"><span class="glyphicon glyphicon-list-alt"></span> Cadastros</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-area="" asp-controller="Login" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Sair</a></li>
+                    </ul>
+                </div>
+
             </div>
-        </div>
-    </nav>
+        </nav>
+    }
+    else
+    {
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="About" class="navbar-brand">MaisVacina</a>
+                </div>
+                <div class="navbar-collapse collapse ">
+                    <ul class="nav navbar-nav">
+
+                        <li><a asp-area="" asp-controller="Cadastro" asp-action="Create2"><span class="glyphicon glyphicon-list-alt"></span> Fazer Cadastro</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact"><span class="glyphicon glyphicon-earphone"></span> Serviços</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a asp-controller="Login" asp-action="Register"><span class="glyphicon glyphicon-user"></span> Registre-se</a></li>
+                        <li><a asp-controller="Login" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Entrar</a></li>
+                    </ul>
+
+                </div>
+
+            </div>
+        </nav>
+    }
+    
 
     <partial name="_CookieConsentPartial" />
 
     <div class="container body-content">
         @RenderBody()
-  
+
     </div>
 
     <environment include="Development">
