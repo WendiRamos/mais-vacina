@@ -55,26 +55,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr BGCOLOR="#F5F5F5">
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPF)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nascimento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Endereco)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-            </tr>
+        <tr BGCOLOR="#F5F5F5">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-controller="Cadastro" asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-controller="Cadastro" asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-controller="Cadastro" asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
